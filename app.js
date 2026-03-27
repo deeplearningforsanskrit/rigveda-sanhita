@@ -10,7 +10,7 @@ async function loadData() {
   try {
     status.textContent = "Loading data...";
 
-    const res = await fetch("rigveda.json");
+    const res = await fetch("rigveda_joined.json");
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     const data = await res.json();
