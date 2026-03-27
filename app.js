@@ -596,33 +596,41 @@ function searchEntries(rawQuery) {
     };
   }
 
-  const fuzzyCandidates = [];
-  for (const item of ENTRIES) {
-    const refScore = qCompact ? fuzzyScore(qCompact, item.compactRef) : Infinity;
-    const textScore = qCompact ? fuzzyScore(qCompact, item.compactText) : Infinity;
-    const latinRefScore = latinCompactQ ? fuzzyScore(latinCompactQ, item.compactLatinRef) : Infinity;
-    const latinTextScore = latinCompactQ ? fuzzyScore(latinCompactQ, item.compactLatinText) : Infinity;
+ const fuzzyCandidates = [];
 
-    const score = Math.min(refScore, textScore, latinRefScore, latinTextScore);
+for (const item of ENTRIES) {
+  const refScore = qCompact ? fuzzyScore(qCompact, item.compactRef) : Infinity;
+  const textScore = qCompact ? fuzzyScore(qCompact, item.compactText) : Infinity;
+  const latinRefScore = latinCompactQ ? fuzzyScore(latinCompactQ, item.compactLatinRef) : Infinity;
+  const latinTextScore = latinCompactQ ? fuzzyScore(latinCompactQ, item.compactLatinText) : Infinity;
 
-    const allowed =
-      baseLen <= 4 ? 1 :
-      baseLen <= 8 ? 2 : 3;
+  const score = Math.min(refScore, textScore, latinRefScore, latinTextScore);
 
-    if (score <= allowed) {
-      fuzzyCandidates.push({ item, score });
-    }
+  const allowed =
+    baseLen <= 4 ? 1 :
+    baseLen <= 8 ? 2 : 3;
+
+  if (score <= allowed) {
+    fuzzyCandidates.push({ item, score });
   }
+}
 
-  fuzzyCandidates.sort((a, b) => {
-    if (a.score !== b.score) return a.score - b.score;
-    return a.item.ref.localeCompare(b.item.ref);
-  });
+fuzzyCandidates.sort((a, b) => {
+  if (a.score !== b.score) return a.score - b.score;
 
-  return {
-    mode: "fuzzy",
-    results: fuzzyCandidates.slice(0, MAX_RESULTS).map((x) => x.item),
-  };
+  const aTextLen = a.item.text.length;
+  const bTextLen = b.item.text.length;
+  if (aTextLen !== bTextLen) return aTextLen - bTextLen;
+
+  return a.item.ref.localeCompare(b.item.ref);
+});
+
+const topFuzzy = fuzzyCandidates.slice(0, 200);
+
+return {
+  mode: "fuzzy",
+  results: topFuzzy.map((x) => x.item),
+};
 }
 
 loadData();
