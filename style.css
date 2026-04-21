@@ -275,3 +275,70 @@ main {
   font-size: 13px;
   font-family: sans-serif;
 }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #111;
+  color: #fff;
+  padding: 12px 16px;
+  border-bottom: 1px solid #333;
+}
+
+.topbar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.topbar-head h1 {
+  margin: 0;
+  font-family: 'Tiro Devanagari Sanskrit', serif;
+}
+
+.topbar-content {
+  max-height: 500px;
+  overflow: hidden;
+  opacity: 1;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.25s ease;
+  margin-top: 12px;
+}
+
+.topbar.collapsed .topbar-content {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.header-toggle {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #555;
+  background: #1e1e1e;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.header-toggle:hover {
+  background: #2a2a2a;
+}
+
+.chevron {
+  display: inline-block;
+  font-size: 20px;
+  line-height: 1;
+  transform: rotate(90deg);
+  transition: transform 0.25s ease;
+}
+
+.topbar.collapsed .chevron {
+  transform: rotate(-90deg);
+}

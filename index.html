@@ -10,9 +10,15 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
+<header class="topbar" id="topbar">
+  <div class="topbar-head">
     <h1>ऋग्वेद संहिता</h1>
+    <button id="headerToggle" class="header-toggle" type="button" aria-label="Hide header">
+      <span class="chevron">»</span>
+    </button>
+  </div>
 
+  <div id="topbarContent" class="topbar-content">
     <div class="reader-toolbar">
       <button id="prevTop">← Previous Sukta</button>
       <div id="pageInfo" class="page-info">Loading...</div>
@@ -29,21 +35,22 @@
       <button id="togglePadaBtn" type="button">Pada Patha: OFF</button>
     </div>
 
-  <div class="jump-toolbar">
-  <select id="jumpMode">
-    <option value="rik">Mandala / Sukta</option>
-    <option value="ashtaka">Ashtaka / Adhyaya / Varga</option>
-  </select>
+    <div class="jump-toolbar">
+      <select id="jumpMode">
+        <option value="rik">Mandala / Sukta</option>
+        <option value="ashtaka">Ashtaka / Adhyaya / Varga</option>
+      </select>
 
-  <input id="jump1" type="number" min="1" value="1" placeholder="Mandala" />
-  <input id="jump2" type="number" min="1" value="1" placeholder="Sukta" />
-  <input id="jump3" type="number" min="1" value="1" placeholder="Varga" class="hidden" />
+      <input id="jump1" type="number" min="1" value="1" placeholder="Mandala" />
+      <input id="jump2" type="number" min="1" value="1" placeholder="Sukta" />
+      <input id="jump3" type="number" min="1" value="1" placeholder="Varga" class="hidden" />
 
-  <button id="jumpGo" type="button">Go</button>
-</div>
+      <button id="jumpGo" type="button">Go</button>
+    </div>
+
     <div id="status">Loading...</div>
-  </header>
-
+  </div>
+</header>
   <main>
     <div id="results"></div>
 

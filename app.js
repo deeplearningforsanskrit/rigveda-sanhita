@@ -10,6 +10,17 @@ let PAGE_INDEX = new Map();      // "6-64" -> pageIndex
 
 const MAX_RESULTS = 200;
 
+const topbar = document.getElementById("topbar");
+const headerToggle = document.getElementById("headerToggle");
+
+headerToggle.addEventListener("click", () => {
+  const collapsed = topbar.classList.toggle("collapsed");
+  headerToggle.setAttribute(
+    "aria-label",
+    collapsed ? "Show header" : "Hide header"
+  );
+});
+
 async function loadData() {
   const status = document.getElementById("status");
 
